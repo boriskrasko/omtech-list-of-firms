@@ -7,6 +7,60 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <form action="" class="form" autocomplete="off">
+    <p>
+      <input class="input required" id="name" type="text" name="input" placeholder=" ">
+      <label for="name" class="label">Nazwa:
+      <strong>*</strong>
+      </label>
+      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <i>Required!</i>
+    </p>
+    <p>
+      <input class="input required" id="code" type="text" name="input" placeholder=" ">
+      <label for="code" class="label">Kod firmy:
+      <strong>*</strong>
+      </label>
+      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <i>Required!</i>
+    </p>
+    <p>Profil firmy:<br>
+      <input id="s" class="radio" type="radio" name="radio" checked>
+      <label for="s">Mały</label><br>
+      <input id="m" class="radio" type="radio" name="radio">
+      <label for="m">Średni</label><br>
+      <input id="l" class="radio" type="radio" name="radio">
+      <label for="l">Dyży</label>
+    </p>
+    <p>
+      <input class="checkbox" type="checkbox" name="checkbox">
+    </p>
+    <p>
+      <input class="input" id="city" type="text" name="input" placeholder=" ">
+      <label for="city" class="label">Miasto:
+      </label>
+      <span onclick="this.parentNode.children[0].value = ''"></span>
+    </p>
+    <p>
+      <input class="input" id="zip" type="text" name="input" placeholder=" ">
+      <label for="zip" class="label">Kod pocztowy:
+      </label>
+      <span onclick="this.parentNode.children[0].value = ''"></span>
+    </p>
+    <p>
+      <input class="input" id="street" type="text" name="input" placeholder=" ">
+      <label for="street" class="label">Ulica:
+      </label>
+      <span onclick="this.parentNode.children[0].value = ''"></span>
+    </p>
+    <p>
+      <input class="input" id="mail" type="text" name="input" placeholder=" ">
+      <label for="mail" class="label">E-mail:
+      </label>
+      <span onclick="this.parentNode.children[0].value = ''"></span>
+    </p>
+    <input type="button" value="Dodaj do tabeli">
+  </form>
 <script src="main.js"></script>
 </body>
 </html>
