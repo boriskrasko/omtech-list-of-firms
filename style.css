@@ -1,11 +1,18 @@
 body {
   font-family: Helvetica, sans-serif;
+  min-width: 1024px;
 }
 
 :root {
   --input-h: 0;
   --input-s: 0%;
   --input-b: 50%;
+}
+
+.app {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
 }
 
 input {
@@ -24,6 +31,10 @@ input {
   border: 1px solid #ddd;
   border-radius: 6px;
   color: #222;
+}
+
+.form ~ div {
+  width: 100%;
 }
 
 input:-webkit-autofill,
@@ -241,4 +252,33 @@ input[type="button"] {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  margin: 12px 12px;
+  padding: 12px 12px;
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  color: #222;
+  display: inline-table;
+  word-wrap:break-word;
+}
+
+.close {
+  width: 2%;
+}
+
+th {
+  width: 10%;
+  text-align: left;
+  background-color: #def;
+  padding: 12px 8px;
+}
+
+td {
+  text-align: left;
+  padding: 12px 8px;
+  height: 30px;
 }

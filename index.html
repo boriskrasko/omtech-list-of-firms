@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <form action="" class="form" autocomplete="off">
+  <div class="app">
+    <form action="" class="form" autocomplete="off">
     <p>
       <input class="input required" id="name" type="text" name="input" placeholder=" ">
       <label for="name" class="label">Nazwa:
@@ -61,6 +62,60 @@
     </p>
     <input type="button" value="Dodaj do tabeli">
   </form>
+  <div>
+    <table border="1px">
+    <thead>Aktywne</thead>
+    <tbody>
+      <tr>
+        <th>Firma</th>
+        <th>Kod firmy</th>
+        <th>Profil</th>
+        <th>Miasto</th>
+        <th>Kod pocztowy</th>
+        <th>Ulica</th>
+        <th>E-mail</th>
+        <th class="close"></th>
+      </tr>
+      <tr>
+        <td>Omtech</td>
+        <td>2281</td>
+        <td>Sredni</td>
+        <td>Warsaw</td>
+        <td>00422</td>
+        <td>Modularna</td>
+        <td>contact@omtech.pl</td>
+        <td onclick="this.parentNode.style.display = 'none'">x</td>
+      </tr>
+      </tr>
+    </tbody>
+  </table>
+  <table border="1px">
+    <thead>Nieaktywne</thead>
+    <tbody>
+      <tr>
+        <th>Firma</th>
+        <th>Kod firmy</th>
+        <th>Profil</th>
+        <th>Miasto</th>
+        <th>Kod pocztowy</th>
+        <th>Ulica</th>
+        <th>E-mail</th>
+        <th class="close"></th>
+      </tr>
+      <tr>
+        <td>Omtech</td>
+        <td>2281</td>
+        <td>Sredni</td>
+        <td>Warsaw</td>
+        <td>00422</td>
+        <td>Modularna</td>
+        <td>contact@omtech.pl</td>
+        <td onclick="this.parentNode.style.display = 'none'">x</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
 <script src="main.js"></script>
 </body>
 </html>
