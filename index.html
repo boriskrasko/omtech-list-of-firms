@@ -19,7 +19,7 @@
       <i>Required!</i>
     </p>
     <p>
-      <input class="input required" id="code" type="text" name="input" placeholder=" " maxlength="4" pattern="[0-9]">
+      <input class="input required" id="code" type="text" name="input" placeholder=" " minlength="4" maxlength="4">
       <label for="code" class="label">Kod firmy:
       <strong>*</strong>
       </label>
@@ -27,6 +27,7 @@
       <i>Required!</i>
       <small class="tip">Ten kod już istneje!</small>
     </p>
+    <button class="button_generating-code" type="button">Generuj</button>
     <p>Profil firmy:<br>
       <input id="s" class="radio" type="radio" name="profile" checked value="Maly">
       <label for="s">Mały</label><br>

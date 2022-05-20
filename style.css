@@ -312,3 +312,11 @@ tr td:last-child:hover {
 .input.required:invalid::after {
   content: "hello";
 }
+
+.button_generating-code {
+  float: right;
+}
+
+.button_generating-code ~ * {
+  clear: right;
+}
