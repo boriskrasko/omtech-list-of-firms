@@ -96,6 +96,7 @@ const createCompany = () => {
   } else {
     get('#code').classList.add('error');
     get('.tip').style.display = 'inline';
+    get('#code').addEventListener('focus', () => get('.tip').style.display = 'none');
   }
 }
 
