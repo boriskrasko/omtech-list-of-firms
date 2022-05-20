@@ -14,7 +14,7 @@
       <label for="name" class="label">Nazwa:
       <strong>*</strong>
       </label>
-      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <span class="erase"></span>
       <i>Required!</i>
     </p>
     <p>
@@ -22,15 +22,15 @@
       <label for="code" class="label">Kod firmy:
       <strong>*</strong>
       </label>
-      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <span class="erase"></span>
       <i>Required!</i>
     </p>
     <p>Profil firmy:<br>
-      <input id="s" class="radio" type="radio" name="radio" checked>
+      <input id="s" class="radio" type="radio" name="profile" checked value="Maly">
       <label for="s">Mały</label><br>
-      <input id="m" class="radio" type="radio" name="radio">
+      <input id="m" class="radio" type="radio" name="profile" value="Średni">
       <label for="m">Średni</label><br>
-      <input id="l" class="radio" type="radio" name="radio">
+      <input id="l" class="radio" type="radio" name="profile" value="Dyży">
       <label for="l">Dyży</label>
     </p>
     <p>
@@ -40,27 +40,27 @@
       <input class="input" id="city" type="text" name="input" placeholder=" ">
       <label for="city" class="label">Miasto:
       </label>
-      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <span class="erase"></span>
     </p>
     <p>
       <input class="input" id="zip" type="text" name="input" placeholder=" ">
       <label for="zip" class="label">Kod pocztowy:
       </label>
-      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <span class="erase"></span>
     </p>
     <p>
-      <input class="input" id="street" type="text" name="input" placeholder=" ">
-      <label for="street" class="label">Ulica:
+      <input class="input" id="address" type="text" name="input" placeholder=" ">
+      <label for="address" class="label">Ulica:
       </label>
-      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <span class="erase"></span>
     </p>
     <p>
-      <input class="input" id="mail" type="text" name="input" placeholder=" ">
-      <label for="mail" class="label">E-mail:
+      <input class="input" id="email" type="text" name="input" placeholder=" ">
+      <label for="email" class="label">E-mail:
       </label>
-      <span onclick="this.parentNode.children[0].value = ''"></span>
+      <span class="erase"></span>
     </p>
-    <input type="button" value="Dodaj do tabeli">
+    <input class="add" type="button" value="Dodaj do tabeli">
   </form>
   <div>
     <table border="1px">
