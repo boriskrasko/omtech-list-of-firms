@@ -27,7 +27,7 @@
       <i>Required!</i>
       <small class="tip">Ten kod już istneje!</small>
     </p>
-    <button class="button_generating-code" type="button">Generuj</button>
+    <button class="button_generating-code" type="button" onclick="get('#code').value = Math.floor(Math.random() * 9000 + 1000)">Generuj</button>
     <p>Profil firmy:<br>
       <input id="s" class="radio" type="radio" name="profile" checked value="Maly">
       <label for="s">Mały</label><br>

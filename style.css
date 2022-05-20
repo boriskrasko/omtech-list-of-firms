@@ -121,10 +121,10 @@ input.input[type="text"]~i {
   margin-left: 0.5rem;
   padding: 0.4rem;
   border-radius: 6px;
-  color: #999;
+  color: #444;
   font-size: 0.8rem;
   transition: 0.2s opacity;
-  background-color: #fff;
+  background-color: #ddd;
 }
 
 input.input[type="text"]:focus~span:hover~i {
@@ -319,4 +319,8 @@ tr td:last-child:hover {
 
 .button_generating-code ~ * {
   clear: right;
+}
+
+input#email {
+  text-transform: none;
 }
