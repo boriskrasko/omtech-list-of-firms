@@ -39,13 +39,6 @@ input {
   width: 100%;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #fff inset !important;
-}
-
 input.input[type="text"] {
   box-sizing: border-box;
   width: 14rem;
@@ -248,15 +241,20 @@ table {
   table-layout: fixed;
   margin: 12px 12px;
   padding: 12px 12px;
-  border: 1px solid #ddd;
   border-collapse: collapse;
+  border-radius: 12px;
   color: #222;
   display: inline-table;
   word-wrap:break-word;
 }
 
+table * {
+  border: 1px solid #ddd;
+}
+
 tr:hover {
   background: #fafafa;
+  border-radius: 12px;
 }
 
 tr:hover td:last-child {
@@ -267,6 +265,8 @@ th {
   text-align: left;
   background-color: #def;
   padding: 12px 8px;
+  color: #fff;
+  background-color: #07f;
 }
 
 th:last-child {
@@ -299,4 +299,16 @@ tr td:last-child:hover {
   padding-right: 2px;
   background: #fff;
   z-index: 99;
+}
+
+.input.required.error {
+  border-color: #f40;
+}
+
+.input.required:invalid {
+  border-color: #f40;
+}
+
+.input.required:invalid::after {
+  content: "hello";
 }

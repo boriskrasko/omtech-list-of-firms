@@ -77,21 +77,23 @@ const createCompany = () => {
     const tableBodyActive = get('.table_active tbody');
     const tableBodyNotActive = get('.table_non-active tbody');
     if(name !== '' && code !== '') {
+      get('#name').classList.remove('error');
+      get('#code').classList.remove('error');
       companies = [...companies, companyId];
       companies = [...new Set(companies)];
       localStorage.setItem('companies', companies);
       localStorage.setItem(companyId, JSON.stringify(company));
       (isActive) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
     } else if (name === '' && code !== ''){
-      get('#name').style.borderColor = 'red';
+      get('#name').classList.add('error');
     } else if (code === '' && name !== '') {
-      get('#code').style.borderColor = 'red';
+      get('#code').classList.add('error');
     } else {
-      get('#name').style.borderColor = 'red';
-      get('#code').style.borderColor = 'red';
+      get('#name').classList.add('error');
+      get('#code').classList.add('error');
     }
   } else {
-    get('#code').style.borderColor = 'red';
+    get('#code').classList.add('error');
     get('.tip').style.display = 'inline';
   }
 }
