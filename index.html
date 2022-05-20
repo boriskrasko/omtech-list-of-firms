@@ -10,7 +10,7 @@
   <div class="app">
     <form action="" class="form" autocomplete="off">
     <p>
-      <input class="input required" id="name" type="text" name="input" placeholder=" ">
+      <input class="input required" id="name" type="text" name="input" placeholder=" " maxlength="20">
       <label for="name" class="label">Nazwa:
       <strong>*</strong>
       </label>
@@ -18,12 +18,13 @@
       <i>Required!</i>
     </p>
     <p>
-      <input class="input required" id="code" type="text" name="input" placeholder=" ">
+      <input class="input required" id="code" type="text" name="input" placeholder=" " maxlength="4">
       <label for="code" class="label">Kod firmy:
       <strong>*</strong>
       </label>
       <span class="erase"></span>
       <i>Required!</i>
+      <small class="tip">Ten kod już istneje!</small>
     </p>
     <p>Profil firmy:<br>
       <input id="s" class="radio" type="radio" name="profile" checked value="Maly">
@@ -74,6 +75,7 @@
         <th>Kod pocztowy</th>
         <th>Ulica</th>
         <th>E-mail</th>
+        <th></th>
       </tr>
     </tbody>
   </table>
@@ -88,6 +90,7 @@
         <th>Kod pocztowy</th>
         <th>Ulica</th>
         <th>E-mail</th>
+        <th></th>
       </tr>
     </tbody>
   </table>

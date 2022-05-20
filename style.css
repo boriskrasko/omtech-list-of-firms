@@ -56,6 +56,7 @@ input.input[type="text"] {
   position: relative;
   z-index: 1;
   background-color: transparent;
+  text-transform: capitalize;
 }
 
 input.input[type="text"]~label {
@@ -125,9 +126,12 @@ input.input[type="text"]~i {
   position: absolute;
   top: 1rem;
   margin-left: 0.5rem;
+  padding: 0.4rem;
+  border-radius: 6px;
   color: #999;
   font-size: 0.8rem;
-  transition: 0.2s opacity
+  transition: 0.2s opacity;
+  background-color: #fff;
 }
 
 input.input[type="text"]:focus~span:hover~i {
@@ -153,23 +157,6 @@ input.input[type="text"]:not(:placeholder-shown):not(:focus)~span::after {
   content: "✕";
   z-index: 2;
   cursor: pointer;
-}
-
-input.submit[type="submit"] {
-  position: absolute;
-  right: 0.5rem;
-  top: 1rem;
-  outline: none;
-  border: none;
-  background: none;
-  color: #777;
-  z-index: 0;
-}
-
-input.input[type="text"]:not(:placeholder-shown)~input.submit[type="submit"] {
-  color: #36e;
-  cursor: pointer;
-  z-index: 2;
 }
 
 input.radio[type="radio"] {
@@ -268,8 +255,12 @@ table {
   word-wrap:break-word;
 }
 
-.close {
-  width: 2%;
+tr:hover {
+  background: #fafafa;
+}
+
+tr:hover td:last-child {
+  color: #222;
 }
 
 th {
@@ -278,7 +269,34 @@ th {
   padding: 12px 8px;
 }
 
+th:last-child {
+  width: 2%;
+}
+
 td {
   text-align: left;
   padding: 4px 8px;
+}
+
+td:last-child {
+  font-size: 24px;
+  text-align: center;
+  color: #777;
+  cursor: pointer;
+}
+
+tr td:last-child:hover {
+  color: red;
+}
+
+.tip {
+  display: none;
+  font-size: 10px;
+  color: red;
+  position: absolute;
+  bottom: -5px;
+  left: -2px;
+  padding-right: 2px;
+  background: #fff;
+  z-index: 99;
 }

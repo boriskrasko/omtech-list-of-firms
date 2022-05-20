@@ -7,11 +7,25 @@ let arrayOfKeys = ['name', 'code', 'profile', 'city', 'zip', 'address', 'email']
 for (let company of companies) {
   let companyData = JSON.parse(localStorage.getItem(company));
   let tableRow = document.createElement('tr');
+  const companyId = `company_id:${companyData.code}`;
+  tableRow.id = companyId;
   for (let key of arrayOfKeys) {
     let tableСell = document.createElement('td');
     tableСell.textContent = companyData[key];
     tableRow.append(tableСell);
   }
+  const buttonDelete = document.createElement('td');
+  buttonDelete.textContent = 'x';
+  tableRow.append(buttonDelete);
+  buttonDelete.addEventListener('click', function() {
+    this.parentNode.parentNode.removeChild(this.parentNode);
+    localStorage.removeItem(this.parentNode.id);
+    let index = companies.indexOf(this.parentNode.id);
+    if (index !== -1) {
+      companies.splice(index, 1);
+      localStorage.setItem('companies', companies);
+    }
+  })
   let tableBodyActive = get('.table_active tbody');
   let tableBodyNotActive = get('.table_non-active tbody');
   (companyData.active) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
@@ -39,19 +53,47 @@ const createCompany = () => {
   company.address = address;
   company.email = email;
   const companyId = `company_id:${company.code}`;
-  companies = [...companies, companyId];
-  localStorage.setItem('companies', companies);
-  localStorage.setItem(companyId, JSON.stringify(company));
-
-  const tableRow = document.createElement('tr');
-  for (let item of companyDataArray) {
-    let tableСell = document.createElement('td');
-    tableСell.textContent = item;
-    tableRow.append(tableСell);
+  let index = companies.indexOf(companyId);
+  if (index == -1 ) {
+    const tableRow = document.createElement('tr');
+    tableRow.id = companyId;
+    for (let item of companyDataArray) {
+      let tableСell = document.createElement('td');
+      tableСell.textContent = item;
+      tableRow.append(tableСell);
+    }
+    const buttonDelete = document.createElement('td');
+    buttonDelete.textContent = 'x';
+    tableRow.append(buttonDelete);
+    buttonDelete.addEventListener('click', function() {
+      this.parentNode.parentNode.removeChild(this.parentNode);
+      localStorage.removeItem(this.parentNode.id);
+      let index = companies.indexOf(this.parentNode.id);
+      if (index !== -1) {
+        companies.splice(index, 1);
+        localStorage.setItem('companies', companies);
+      } 
+    })
+    const tableBodyActive = get('.table_active tbody');
+    const tableBodyNotActive = get('.table_non-active tbody');
+    if(name !== '' && code !== '') {
+      companies = [...companies, companyId];
+      companies = [...new Set(companies)];
+      localStorage.setItem('companies', companies);
+      localStorage.setItem(companyId, JSON.stringify(company));
+      (isActive) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
+    } else if (name === '' && code !== ''){
+      get('#name').style.borderColor = 'red';
+    } else if (code === '' && name !== '') {
+      get('#code').style.borderColor = 'red';
+    } else {
+      get('#name').style.borderColor = 'red';
+      get('#code').style.borderColor = 'red';
+    }
+  } else {
+    get('#code').style.borderColor = 'red';
+    get('.tip').style.display = 'inline';
   }
-  const tableBodyActive = get('.table_active tbody');
-  const tableBodyNotActive = get('.table_non-active tbody');
-  (isActive) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
 }
 
 const eraseIcons = document.querySelectorAll('.erase')
