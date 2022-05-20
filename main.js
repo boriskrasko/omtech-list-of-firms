@@ -2,7 +2,8 @@ let getAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : 
 let get = (selector) => document.querySelector(selector);
 
 const createCompany = () => {
-  const [name, code, profile, city, zip, address, email] = [
+  const [isActive, name, code, profile, city, zip, address, email] = [
+    get('#active').checked,
     get('#name').value,
     get('#code').value,
     get('input[name="profile"]:checked').value,
@@ -11,7 +12,9 @@ const createCompany = () => {
     get('#address').value,
     get('#email').value,
   ]
+  const companyDataArray = [name, code, profile, city, zip, address, email];
   const company = {};
+  company.active = isActive;
   company.name = name;
   company.code = code;
   company.profile = profile;
@@ -21,6 +24,16 @@ const createCompany = () => {
   company.email = email;
   console.log(company);
   localStorage.setItem(`company_id:${company.code}`, JSON.stringify(company));
+
+  const tableRow = document.createElement('tr');
+  for (let item of companyDataArray) {
+    let tableСell = document.createElement('td');
+    tableСell.textContent = item;
+    tableRow.append(tableСell);
+  }
+  const tableBodyActive = get('.table_active tbody');
+  const tableBodyNotActive = get('.table_non-active tbody');
+  (isActive) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
 }
 
 const eraseIcons = document.querySelectorAll('.erase')

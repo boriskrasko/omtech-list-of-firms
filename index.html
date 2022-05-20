@@ -34,7 +34,7 @@
       <label for="l">Dyży</label>
     </p>
     <p>
-      <input class="checkbox" type="checkbox" name="checkbox">
+      <input id="active" class="checkbox" type="checkbox" name="checkbox">
     </p>
     <p>
       <input class="input" id="city" type="text" name="input" placeholder=" ">
@@ -63,7 +63,7 @@
     <input class="add" type="button" value="Dodaj do tabeli">
   </form>
   <div>
-    <table border="1px">
+    <table border="1px" class="table_active">
     <thead>Aktywne</thead>
     <tbody>
       <tr>
@@ -74,22 +74,10 @@
         <th>Kod pocztowy</th>
         <th>Ulica</th>
         <th>E-mail</th>
-        <th class="close"></th>
-      </tr>
-      <tr>
-        <td>Omtech</td>
-        <td>2281</td>
-        <td>Sredni</td>
-        <td>Warsaw</td>
-        <td>00422</td>
-        <td>Modularna</td>
-        <td>contact@omtech.pl</td>
-        <td onclick="this.parentNode.style.display = 'none'">x</td>
-      </tr>
       </tr>
     </tbody>
   </table>
-  <table border="1px">
+  <table border="1px" class="table_non-active">
     <thead>Nieaktywne</thead>
     <tbody>
       <tr>
@@ -100,17 +88,6 @@
         <th>Kod pocztowy</th>
         <th>Ulica</th>
         <th>E-mail</th>
-        <th class="close"></th>
-      </tr>
-      <tr>
-        <td>Omtech</td>
-        <td>2281</td>
-        <td>Sredni</td>
-        <td>Warsaw</td>
-        <td>00422</td>
-        <td>Modularna</td>
-        <td>contact@omtech.pl</td>
-        <td onclick="this.parentNode.style.display = 'none'">x</td>
       </tr>
     </tbody>
   </table>

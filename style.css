@@ -1,6 +1,8 @@
 body {
   font-family: Helvetica, sans-serif;
   min-width: 1024px;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 :root {
@@ -255,7 +257,7 @@ input[type="button"] {
 }
 
 table {
-  width: 100%;
+  width: 96%;
   table-layout: fixed;
   margin: 12px 12px;
   padding: 12px 12px;
@@ -271,7 +273,6 @@ table {
 }
 
 th {
-  width: 10%;
   text-align: left;
   background-color: #def;
   padding: 12px 8px;
@@ -279,6 +280,5 @@ th {
 
 td {
   text-align: left;
-  padding: 12px 8px;
-  height: 30px;
+  padding: 4px 8px;
 }
