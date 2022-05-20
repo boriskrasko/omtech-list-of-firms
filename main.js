@@ -76,7 +76,8 @@ const createCompany = () => {
     })
     const tableBodyActive = get('.table_active tbody');
     const tableBodyNotActive = get('.table_non-active tbody');
-    if(name !== '' && code !== '') {
+    if(name !== '' && code !== '' && ~~code !== 0) {
+      console.log(~~code);
       get('#name').classList.remove('error');
       get('#code').classList.remove('error');
       companies = [...companies, companyId];

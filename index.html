@@ -11,7 +11,7 @@
     <form action="" class="form" autocomplete="off">
       <h2>Nowa</h2>
     <p>
-      <input class="input required" id="name" type="text" name="input" placeholder=" " maxlength="20" pattern="[A-Za-z]">
+      <input class="input required" id="name" type="text" name="input" placeholder=" " maxlength="20" pattern="[a-zA-Z]*">
       <label for="name" class="label">Nazwa:
       <strong>*</strong>
       </label>
@@ -19,7 +19,7 @@
       <i>Required!</i>
     </p>
     <p>
-      <input class="input required" id="code" type="text" name="input" placeholder=" " minlength="4" maxlength="4">
+      <input class="input required" id="code" type="text" name="input" placeholder=" " minlength="4" maxlength="4" pattern="[0-9]*">
       <label for="code" class="label">Kod firmy:
       <strong>*</strong>
       </label>
