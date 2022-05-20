@@ -1,6 +1,22 @@
 let getAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
 let get = (selector) => document.querySelector(selector);
 
+let companies = (localStorage.getItem('companies') !== null && localStorage.getItem('companies') != '') ? [...localStorage.getItem('companies').split(',')] : [];
+localStorage.setItem('companies', companies);
+let arrayOfKeys = ['name', 'code', 'profile', 'city', 'zip', 'address', 'email'];
+for (let company of companies) {
+  let companyData = JSON.parse(localStorage.getItem(company));
+  let tableRow = document.createElement('tr');
+  for (let key of arrayOfKeys) {
+    let tableСell = document.createElement('td');
+    tableСell.textContent = companyData[key];
+    tableRow.append(tableСell);
+  }
+  let tableBodyActive = get('.table_active tbody');
+  let tableBodyNotActive = get('.table_non-active tbody');
+  (companyData.active) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
+}
+
 const createCompany = () => {
   const [isActive, name, code, profile, city, zip, address, email] = [
     get('#active').checked,
@@ -12,7 +28,7 @@ const createCompany = () => {
     get('#address').value,
     get('#email').value,
   ]
-  const companyDataArray = [name, code, profile, city, zip, address, email];
+  let companyDataArray = [name, code, profile, city, zip, address, email];
   const company = {};
   company.active = isActive;
   company.name = name;
@@ -22,8 +38,10 @@ const createCompany = () => {
   company.zip = zip;
   company.address = address;
   company.email = email;
-  console.log(company);
-  localStorage.setItem(`company_id:${company.code}`, JSON.stringify(company));
+  const companyId = `company_id:${company.code}`;
+  companies = [...companies, companyId];
+  localStorage.setItem('companies', companies);
+  localStorage.setItem(companyId, JSON.stringify(company));
 
   const tableRow = document.createElement('tr');
   for (let item of companyDataArray) {
@@ -45,4 +63,3 @@ for (let eraseIcon of eraseIcons) {
 
 const buttonAddToTable = get('.add')
 buttonAddToTable.addEventListener('click', () => createCompany())
-
