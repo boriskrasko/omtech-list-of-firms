@@ -76,15 +76,18 @@ const createCompany = () => {
     })
     const tableBodyActive = get('.table_active tbody');
     const tableBodyNotActive = get('.table_non-active tbody');
-    if(name !== '' && code !== '' && ~~code !== 0) {
-      console.log(~~code);
-      get('#name').classList.remove('error');
-      get('#code').classList.remove('error');
-      companies = [...companies, companyId];
-      companies = [...new Set(companies)];
-      localStorage.setItem('companies', companies);
-      localStorage.setItem(companyId, JSON.stringify(company));
-      (isActive) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
+    if(name !== '' && code !== '' && ~~code !== 0 && code.length === 4 && /^[a-zA-Z]*$/.test(name)) {
+      if (email === '' || /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)) {
+        get('#name').classList.remove('error');
+        get('#code').classList.remove('error');
+        companies = [...companies, companyId];
+        companies = [...new Set(companies)];
+        localStorage.setItem('companies', companies);
+        localStorage.setItem(companyId, JSON.stringify(company));
+        (isActive) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
+      } else {
+         get('#email').classList.add('error');
+      }
     } else if (name === '' && code !== ''){
       get('#name').classList.add('error');
     } else if (code === '' && name !== '') {

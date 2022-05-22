@@ -305,6 +305,11 @@ tr td:last-child:hover {
   border-color: #f40;
 }
 
+.input.error {
+  border-color: #f40 !important;
+}
+
+
 .input.required:invalid {
   border-color: #f40;
 }
