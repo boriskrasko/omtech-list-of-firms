@@ -111,6 +111,10 @@ const createCompany = () => {
       getError(codeInput, codeInputTooltip, 'Ten kod już istneje!');
     }
 
+    if (!/^[0-9]*$/.test(code)) {
+      getError(codeInput, codeInputTooltip, 'Tylko cyfry!');
+    }
+
     codeInput.onclick = () => {
       codeInputTooltip.style.display = 'none';
       codeInput.classList.remove('error');
