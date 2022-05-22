@@ -1,38 +1,52 @@
-let getAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
-let get = (selector) => document.querySelector(selector);
+const getAll = (selector, parent) => parent 
+? parent.querySelectorAll(selector) 
+: document.querySelectorAll(selector); // function to get elements by selector like $('selector') jQuery;
 
-let companies = (localStorage.getItem('companies') !== null && localStorage.getItem('companies') != '') ? [...localStorage.getItem('companies').split(',')] : [];
-localStorage.setItem('companies', companies);
-let arrayOfKeys = ['name', 'code', 'profile', 'city', 'zip', 'address', 'email'];
-for (let company of companies) {
-  let companyData = JSON.parse(localStorage.getItem(company));
-  let tableRow = document.createElement('tr');
+const get = (selector) => document.querySelector(selector); // function to get single element by selector like $('selector') jQuery;
+
+const getParentNode = (elem, n) => n === 0 ? elem : getParentNode(elem.parentNode, n - 1); // recursion to get the boring node
+
+let companies = (localStorage.getItem('companies') !== null && localStorage.getItem('companies') != '') 
+? [...localStorage.getItem('companies').split(',')] 
+: []; // create Array with company IDs from LocalStorage: 'company_id:1234'
+
+const arrayOfKeys = ['name', 'code', 'profile', 'city', 'zip', 'address', 'email'];
+const tableActive = get('table .active');
+const tableNotActive = get('table .not-active');
+
+// add delete icon for each table row
+const addDeleteIcon = (parrent) => {
+  const iconDelete = document.createElement('td');
+  iconDelete.textContent = 'x';
+  parrent.append(iconDelete);
+  iconDelete.addEventListener('click', function() {
+    getParentNode(this, 2).removeChild(this.parentNode); // remove company from table
+    localStorage.removeItem(this.parentNode.id); // remove company from local storage
+    const index = companies.indexOf(this.parentNode.id);
+    companies.splice(index, 1); // remove company from Array with company IDs
+    localStorage.setItem('companies', companies); // update company list in local storage
+  })
+}
+
+// create table rows from local storage data
+for (let company of companies) { 
+  const companyData = JSON.parse(localStorage.getItem(company));
+  const tableRow = document.createElement('tr');
   const companyId = `company_id:${companyData.code}`;
   tableRow.id = companyId;
   for (let key of arrayOfKeys) {
-    let tableСell = document.createElement('td');
+    const tableСell = document.createElement('td');
     tableСell.textContent = companyData[key];
     tableRow.append(tableСell);
   }
-  const buttonDelete = document.createElement('td');
-  buttonDelete.textContent = 'x';
-  tableRow.append(buttonDelete);
-  buttonDelete.addEventListener('click', function() {
-    this.parentNode.parentNode.removeChild(this.parentNode);
-    localStorage.removeItem(this.parentNode.id);
-    let index = companies.indexOf(this.parentNode.id);
-    if (index !== -1) {
-      companies.splice(index, 1);
-      localStorage.setItem('companies', companies);
-    }
-  })
-  let tableBodyActive = get('.table_active tbody');
-  let tableBodyNotActive = get('.table_non-active tbody');
-  (companyData.active) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
+  addDeleteIcon(tableRow);
+  // add row to table
+  companyData.active ? tableActive.append(tableRow) : tableNotActive.append(tableRow);
 }
 
+// create company Object from form data
 const createCompany = () => {
-  const [isActive, name, code, profile, city, zip, address, email] = [
+  let [isActive, name, code, profile, city, zip, address, email] = [
     get('#active').checked,
     get('#name').value,
     get('#code').value,
@@ -42,7 +56,8 @@ const createCompany = () => {
     get('#address').value,
     get('#email').value,
   ]
-  let companyDataArray = [name, code, profile, city, zip, address, email];
+  // add properties to company Object
+  const companyPropertyArray = [name, code, profile, city, zip, address, email];
   const company = {};
   company.active = isActive;
   company.name = name;
@@ -52,54 +67,105 @@ const createCompany = () => {
   company.zip = zip;
   company.address = address;
   company.email = email;
+
   const companyId = `company_id:${company.code}`;
-  let index = companies.indexOf(companyId);
-  if (index == -1 ) {
+
+  const getError = (item, itemTooltip, text) => {
+    itemTooltip.textContent = text;
+    itemTooltip.style.display = 'inline';
+    item.classList.add('error');
+    isValid = false;
+  }
+
+  const checkName = () => {
+    const nameInput = get('#name');
+    const nameInputTooltip = get('#name ~.tip');
+    if (name.trim() === '') {
+      getError(nameInput, nameInputTooltip, 'To pole jest wymagane!');
+    }
+    if (!/^[a-zA-Z\s]*$/.test(name)) {
+      getError(nameInput, nameInputTooltip, 'Tylko litery A-z!');
+    }
+
+    nameInput.onclick = () => {
+      nameInputTooltip.style.display = 'none';
+      nameInput.classList.remove('error');
+    }
+  }
+
+  const checkCode = () => {
+    const codeInput = get('#code');
+    const codeInputTooltip = get('#code ~.tip');
+    const index = companies.indexOf(companyId);
+    if (code.trim() === '') {
+      getError(codeInput, codeInputTooltip, 'To pole jest wymagane!');
+    }
+    if (code !== '' && !~~code) {
+      getError(codeInput, codeInputTooltip, 'Tylko cyfry!');
+    }
+    if (code !== '' && ~~code && code.length < 4) {
+      getError(codeInput, codeInputTooltip, 'Składa się z 4 cyfr!');
+
+    }
+    if (index !== -1) {
+      getError(codeInput, codeInputTooltip, 'Ten kod już istneje!');
+    }
+
+    codeInput.onclick = () => {
+      codeInputTooltip.style.display = 'none';
+      codeInput.classList.remove('error');
+    }
+  }
+
+  const checkEmail = () => {
+    const emailInput = get('#email');
+    const emailInputTooltip = get('#email ~.tip');
+    if (email !== '' && !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)) {
+      getError(emailInput, emailInputTooltip, 'Nieprawidlowy format!');
+    }
+    emailInput.onclick = () => {
+      emailInputTooltip.style.display = 'none';
+      emailInput.classList.remove('error');
+    }
+  }
+
+  const checkZip = () => {
+    const zipInput = get('#zip');
+    const zipInputTooltip = get('#zip ~.tip');
+    if (zip !== '' && !~~zip) {
+      getError(zipInput, zipInputTooltip, 'Tylko cyfry!');
+    }
+    zipInput.onclick = () => {
+      zipInputTooltip.style.display = 'none';
+      zipInput.classList.remove('error');
+    }
+  }
+
+  let isValid = true;
+  checkName();
+  checkCode();
+  checkEmail();
+  checkZip();
+  if(isValid) {
     const tableRow = document.createElement('tr');
     tableRow.id = companyId;
-    for (let item of companyDataArray) {
+    for (let item of companyPropertyArray) {
       let tableСell = document.createElement('td');
       tableСell.textContent = item;
       tableRow.append(tableСell);
     }
-    const buttonDelete = document.createElement('td');
-    buttonDelete.textContent = 'x';
-    tableRow.append(buttonDelete);
-    buttonDelete.addEventListener('click', function() {
-      this.parentNode.parentNode.removeChild(this.parentNode);
-      localStorage.removeItem(this.parentNode.id);
-      let index = companies.indexOf(this.parentNode.id);
-      if (index !== -1) {
-        companies.splice(index, 1);
-        localStorage.setItem('companies', companies);
-      } 
-    })
-    const tableBodyActive = get('.table_active tbody');
-    const tableBodyNotActive = get('.table_non-active tbody');
-    if(name !== '' && code !== '' && ~~code !== 0 && code.length === 4 && /^[a-zA-Z]*$/.test(name)) {
-      if (email === '' || /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)) {
-        get('#name').classList.remove('error');
-        get('#code').classList.remove('error');
-        companies = [...companies, companyId];
-        companies = [...new Set(companies)];
-        localStorage.setItem('companies', companies);
-        localStorage.setItem(companyId, JSON.stringify(company));
-        (isActive) ? tableBodyActive.append(tableRow) : tableBodyNotActive.append(tableRow);
-      } else {
-         get('#email').classList.add('error');
-      }
-    } else if (name === '' && code !== ''){
-      get('#name').classList.add('error');
-    } else if (code === '' && name !== '') {
-      get('#code').classList.add('error');
-    } else {
-      get('#name').classList.add('error');
-      get('#code').classList.add('error');
+    addDeleteIcon(tableRow);
+    get('#name').classList.remove('error');
+    get('#code').classList.remove('error');
+    companies = [...companies, companyId];
+    companies = [...new Set(companies)];
+    localStorage.setItem('companies', companies);
+    localStorage.setItem(companyId, JSON.stringify(company));
+    (isActive) ? tableActive.append(tableRow) : tableNotActive.append(tableRow);
+    let inputs = getAll('.input');
+    for (let input of inputs) {
+      input.value = '';
     }
-  } else {
-    get('#code').classList.add('error');
-    get('.tip').style.display = 'inline';
-    get('#code').addEventListener('focus', () => get('.tip').style.display = 'none');
   }
 }
 
@@ -109,6 +175,15 @@ for (let eraseIcon of eraseIcons) {
     this.parentNode.children[0].value = '';
   })
 }
+
+const getRandomCode = () => {
+  get('#code').value = Math.floor(Math.random() * 9000 + 1000);
+  get('#code ~.tip').style.display = 'none';
+  get('#code').classList.remove('error');
+}
+
+const buttonGenCode = get('.button_generating-code');
+buttonGenCode.onclick = () => getRandomCode();
 
 const buttonAddToTable = get('.add')
 buttonAddToTable.addEventListener('click', () => createCompany())

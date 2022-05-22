@@ -1,6 +1,6 @@
 body {
   font-family: Helvetica, sans-serif;
-  min-width: 1024px;
+  min-width: 1280px;
   max-width: 1920px;
   margin: 0 auto;
 }
@@ -11,14 +11,23 @@ body {
   --input-b: 50%;
 }
 
+input {
+  font-size: 16px;
+}
+
+button,
+input[type='button'] {
+  cursor: pointer;
+}
+
+input[type='button']:hover {
+  opacity: 0.9;
+}
+
 .app {
   width: 100%;
   display: flex;
   align-items: flex-start;
-}
-
-input {
-  font-size: 16px;
 }
 
 .form,
@@ -39,7 +48,7 @@ input {
   width: 100%;
 }
 
-input.input[type="text"] {
+.input[type="text"] {
   box-sizing: border-box;
   width: 14rem;
   height: 3rem;
@@ -52,7 +61,7 @@ input.input[type="text"] {
   text-transform: capitalize;
 }
 
-input.input[type="text"]~label {
+.input[type="text"]~label {
   position: absolute;
   top: 1rem;
   left: 0.5rem;
@@ -61,30 +70,30 @@ input.input[type="text"]~label {
   transition: 0.1s all;
 }
 
-input.input[type="text"]:focus {
+.input[type="text"]:focus {
   background: transparent;
 }
 
-input.input[type="text"]:focus~label {
+.input[type="text"]:focus~label {
   top: 0.4rem;
   font-size: 0.7rem;
 }
 
-input.input[type="text"]:not(:placeholder-shown)~label {
+.input[type="text"]:not(:placeholder-shown)~label {
   top: 0.4rem;
   font-size: 0.7rem;
   z-index: 1;
 }
 
-input.input[type="text"]:focus~label>strong {
+.input[type="text"]:focus~label>strong {
   opacity: 0;
 }
 
-input.input[type="text"]:not(:placeholder-shown)~label>strong {
+.input[type="text"]:not(:placeholder-shown)~label>strong {
   opacity: 0;
 }
 
-input.input[type="text"]~span::after {
+.input[type="text"]~span::after {
   opacity: 0;
   position: absolute;
   right: 0.5rem;
@@ -96,11 +105,11 @@ input.input[type="text"]~span::after {
   z-index: 2;
 }
 
-input.input[type="text"]~span:hover::after {
+.input[type="text"]~span:hover::after {
   color: #f44;
 }
 
-input.required[type="text"]:focus~span::after {
+.required[type="text"]:focus~span::after {
   opacity: 1;
   content: '*';
   color: #f44;
@@ -108,13 +117,13 @@ input.required[type="text"]:focus~span::after {
   font-size: 1.5rem;
 }
 
-input.input[type="text"]:focus~span:hover::after {
+.input[type="text"]:focus~span:hover::after {
   opacity: 1;
   color: #000;
   cursor: pointer;
 }
 
-input.input[type="text"]~i {
+.input[type="text"]~i {
   opacity: 0;
   position: absolute;
   top: 1rem;
@@ -127,11 +136,11 @@ input.input[type="text"]~i {
   background-color: #ddd;
 }
 
-input.input[type="text"]:focus~span:hover~i {
+.input[type="text"]:focus~span:hover~i {
   opacity: 1;
 }
 
-input.input[type="text"]:not(:placeholder-shown):focus~span::after {
+.input[type="text"]:not(:placeholder-shown):focus~span::after {
   opacity: 1;
   content: '...';
   color: #999;
@@ -145,14 +154,14 @@ input.input[type="text"]:not(:placeholder-shown):focus~span::after {
   }
 }
 
-input.input[type="text"]:not(:placeholder-shown):not(:focus)~span::after {
+.input[type="text"]:not(:placeholder-shown):not(:focus)~span::after {
   opacity: 1;
   content: "✕";
   z-index: 2;
   cursor: pointer;
 }
 
-input.radio[type="radio"] {
+.radio[type="radio"] {
   --size: 0.8125rem;
   --color: hsla(var(--input-h), var(--input-s), var(--input-b), 1);
   --unit: calc(var(--size) * 0.125);
@@ -167,23 +176,23 @@ input.radio[type="radio"] {
   border: var(--border-width, 0.0625rem) solid var(--color, #000);
 }
 
-input.radio[type="radio"]:hover {
+.radio[type="radio"]:hover {
   --input-b: 25%;
 }
 
-input.radio[type="radio"]:checked {
+.radio[type="radio"]:checked {
   --input-b: 10%;
   box-shadow: inset 0 0 0 var(--unit, 0.125rem) #fff;
   background-color: var(--color, #000);
 }
 
-input.radio[type="radio"]:checked:hover {
+.radio[type="radio"]:checked:hover {
   --input-b: 0%;
   box-shadow: inset 0 0 0 var(--unit, 0.125rem) #fff;
   background-color: var(--color, #000);
 }
 
-input.checkbox[type="checkbox"] {
+.checkbox[type="checkbox"] {
   --size: 0.8125rem;
   --color: hsla(var(--input-h), var(--input-s), var(--input-b), 1);
   --unit: calc(var(--size) * 0.125);
@@ -196,28 +205,28 @@ input.checkbox[type="checkbox"] {
   border: var(--border-width, 0.0625rem) solid var(--color, #000);
 }
 
-input.checkbox[type="checkbox"]:hover {
+.checkbox[type="checkbox"]:hover {
   --input-b: 25%;
 }
 
-input.checkbox[type="checkbox"]:checked {
+.checkbox[type="checkbox"]:checked {
   --input-b: 10%;
   background: url(checkmark.svg) var(--color, #000) center center / 80% no-repeat;
 }
 
-input.checkbox[type="checkbox"]:checked:hover {
+.checkbox[type="checkbox"]:checked:hover {
   --input-b: 0%;
   background-color: var(--color, #000);
 }
 
-input.checkbox[type="checkbox"]::after {
+.checkbox[type="checkbox"]::after {
   content: 'Nieaktywna';
   position: absolute;
   left: 40px;
   top: 1px;
 }
 
-input.checkbox[type="checkbox"]:checked::after {
+.checkbox[type="checkbox"]:checked::after {
   content: 'Aktywna';
 }
 
@@ -276,6 +285,7 @@ th:last-child {
 td {
   text-align: left;
   padding: 4px 8px;
+  text-transform: capitalize;
 }
 
 td:last-child {
@@ -283,6 +293,10 @@ td:last-child {
   text-align: center;
   color: #777;
   cursor: pointer;
+}
+
+td:nth-last-child(2) {
+  text-transform: none;
 }
 
 tr td:last-child:hover {
@@ -309,7 +323,6 @@ tr td:last-child:hover {
   border-color: #f40 !important;
 }
 
-
 .input.required:invalid {
   border-color: #f40;
 }
@@ -326,6 +339,6 @@ tr td:last-child:hover {
   clear: right;
 }
 
-input#email {
+.input#email {
   text-transform: none;
 }
