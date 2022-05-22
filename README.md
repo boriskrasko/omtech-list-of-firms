@@ -30,3 +30,11 @@ Jeśli firma przechodzi walidację trafia do jednej z 2 tabel (jest to uwarunkow
 W tabelce wyświetlane są wszystkie pola firmy.
 Istnieje możliwość usunięcia poszczególnej firmy z tabeli.
 Dane do wyświetlania w aplikacji są przechowywane w pamięci przeglądarki
+
+## Deploy 
+
+https://omtech-firm-list.netlify.app/
+
+## App Screen 
+
+![screencapture-omtech-firm-list-netlify-app-2022-05-23-00_49_10](https://user-images.githubusercontent.com/59699177/169719307-f34f9678-649d-4f1d-8566-9f842ce42291.png)
